@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:include filename="$(find arm_description)/urdf/crane_plus_hardware.xacro"/>
+
+  <xacro:macro name="crane_plus_gripper_only" params="parent *origin">
+    
+    <xacro:bioloid_f3_fixed
+        parent="${parent}"
+        name="crane_plus_internal_wrist_joiner"
+        color="Gray">
+        <xacro:insert_block name="origin"/>
+    </xacro:bioloid_f3_fixed>
+
+    <xacro:dynamixel_ax12_fixed
+        parent="crane_plus_internal_wrist_joiner_link"
+        name="crane_plus_internal_gripper_servo"
+        color="Black">
+        <origin xyz="${AX12_SIDE_SCREW_OFFSET} 0 ${F3_SCREW_HEIGHT+AX12_ORIGIN_TO_SIDE_SCREW}" rpy="${M_PI/2} ${M_PI} 0"/>
+    </xacro:dynamixel_ax12_fixed>
+
+    <xacro:bioloid_f3_fixed
+        parent="crane_plus_internal_gripper_servo_link"
+        name="crane_plus_internal_fixed_finger_joiner"
+        color="Gray">
+        <origin xyz="${AX12_ORIGIN_TO_END_SCREW+F3_SCREW_HEIGHT} 0 0" rpy="-${M_PI/2} 0 ${M_PI/2}"/>
+    </xacro:bioloid_f3_fixed>
+
+    <xacro:custom_finger
+        parent="crane_plus_internal_fixed_finger_joiner_link"
+        name="crane_plus_internal_fixed_finger"
+        color="Black">
+      <origin xyz="0 0 0" rpy="0 0 ${M_PI}"/> 
+    </xacro:custom_finger>
+
+    <joint name="crane_plus_fixed_finger_tip" type="fixed">
+      <origin xyz="0.0745 0 -0.0106" rpy="${M_PI/2} 0 ${M_PI/2}"/>
+      <parent link="crane_plus_internal_fixed_finger_link"/>
+      <child link="crane_plus_fixed_finger_tip_link"/>
+    </joint>
+    <link name="crane_plus_fixed_finger_tip_link"/>
+
+    <xacro:bioloid_f2_revolute
+        parent="crane_plus_internal_gripper_servo_link"
+        name="crane_plus_moving_finger"
+        color="Gray"
+        vlimit="1.571"
+        llimit="-0.6"
+        ulimit="0.508">
+        <origin xyz="-${AX12_ORIGIN_TO_AXLE} 0 0" rpy="-${M_PI/2} 0 -${M_PI/2}"/>
+    </xacro:bioloid_f2_revolute>
+
+    <xacro:custom_finger
+        parent="crane_plus_moving_finger_link"
+        name="crane_plus_internal_moving_finger_plate"
+        color="Black">
+      <origin xyz="0 0 -${F2_AXLE_HEIGHT}" rpy="${M_PI} 0 0"/> </xacro:custom_finger>
+
+    <joint name="crane_plus_moving_finger_tip" type="fixed">
+      <origin xyz="0.0923 0 -0.0194" rpy="${M_PI/2} 0 ${M_PI/2}"/>
+      <parent link="crane_plus_internal_moving_finger_plate_link"/>
+      <child link="crane_plus_moving_finger_tip_link"/>
+    </joint>
+    <link name="crane_plus_moving_finger_tip_link"/>
+
+  </xacro:macro>
+</robot>

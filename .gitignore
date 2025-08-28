@@ -1,0 +1,11 @@
+# ROS build files
+build/
+install/
+log/
+
+# Outros
+*~
+*.pyc
+*.swp
+.vscode/
+
