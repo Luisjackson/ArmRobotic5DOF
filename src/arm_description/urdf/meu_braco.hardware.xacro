@@ -1,0 +1,122 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:property name="M_PI" value="3.14159"/>
+  <xacro:property name="SCALE_MM" value="0.001"/>
+
+  <xacro:property name="F10_HEIGHT" value="0.004"/>
+  <xacro:property name="F4_HEIGHT" value="0.0525"/>
+  <xacro:property name="F3_HEIGHT" value="0.009"/>
+  <xacro:property name="AX12_HEIGHT" value="0.0385"/>
+  <xacro:property name="AX12_WIDTH" value="0.038"/>
+  <xacro:property name="AX12_LENGTH" value="0.050"/>
+  <xacro:property name="F2_HEIGHT" value="0.0265"/>
+
+  <xacro:property name="CRANE_AX12_WIDTH" value="0.032"/>
+  <xacro:property name="CRANE_F2_HEIGHT" value="0.0375"/>
+  <xacro:property name="AX12_ORIGIN_TO_SIDE_SCREW" value="0.0135"/>
+  <xacro:property name="AX12_ORIGIN_OFFSET_X" value="-0.0015"/>
+  <xacro:property name="AX12_SIDE_SCREW_OFFSET" value="0.0028"/>
+  <xacro:property name="AX12_ORIGIN_TO_END_SCREW" value="0.024"/>
+  <xacro:property name="AX12_ORIGIN_TO_AXLE" value="0.012"/>
+  <xacro:property name="AX12_BODY_FULL_HEIGHT" value="0.038"/>
+  <xacro:property name="F2_AXLE_HEIGHT" value="0.0265"/>
+  <xacro:property name="F3_SCREW_HEIGHT" value="0.0055"/>
+
+  <xacro:macro name="box_inertia" params="mass">
+    <inertial>
+      <mass value="${mass}" /><origin xyz="0 0 0" rpy="0 0 0" />
+      <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0001" />
+    </inertial>
+  </xacro:macro>
+
+  <xacro:macro name="dynamixel_AX12_fixed" params="parent name *origin">
+    <joint name="${name}_joint" type="fixed"><xacro:insert_block name="origin"/><parent link="${parent}"/><child link="${name}_link"/></joint>
+    <link name="${name}_link">
+      <xacro:box_inertia mass="0.055"/>
+      <visual><origin xyz=" 0 0 0 " rpy="0 0 0"/><geometry><mesh filename="package://arm_description/meshes/ax12_box.stl" scale="${SCALE_MM} ${SCALE_MM} ${SCALE_MM}"/></geometry><material name="Black"/></visual>
+      <collision><origin xyz="0.0 0.0 -0.01241" rpy="0 0 0"/><geometry><box size="0.025 0.038 0.04762"/></geometry></collision>
+    </link>
+  </xacro:macro>
+
+  <xacro:macro name="bioloid_F10_fixed" params="parent name color *origin">
+    <joint name="${name}_joint" type="fixed"><xacro:insert_block name="origin"/><parent link="${parent}"/><child link="${name}_link"/></joint>
+    <link name="${name}_link">
+      <xacro:box_inertia mass="0.004"/>
+      <visual><origin xyz=" 0 0 0 " rpy="0 0 0"/><geometry><mesh filename="package://arm_description/meshes/F10.stl" scale="${SCALE_MM} ${SCALE_MM} ${SCALE_MM}"/></geometry><material name="${color}"/></visual>
+      <collision><origin xyz="0.0 0.0 0.0" rpy="0 0 0"/><geometry><box size="0.025 0.038 0.004"/></geometry></collision>
+    </link>
+  </xacro:macro>
+
+  <xacro:macro name="bioloid_F3_fixed" params="parent name color *origin">
+    <joint name="${name}_joint" type="fixed"><xacro:insert_block name="origin"/><parent link="${parent}"/><child link="${name}_link"/></joint>
+    <link name="${name}_link">
+      <xacro:box_inertia mass="0.005"/>
+      <visual><origin xyz=" 0 0 0 " rpy="0 0 0"/><geometry><mesh filename="package://arm_description/meshes/F3.stl" scale="${SCALE_MM} ${SCALE_MM} ${SCALE_MM}"/></geometry><material name="${color}"/></visual>
+      <collision><origin xyz="0.0 0.0 -0.0045" rpy="0 0 0"/><geometry><box size="0.025 0.038 0.009"/></geometry></collision>
+    </link>
+  </xacro:macro>
+
+  <xacro:macro name="bioloid_F3_revolute" params="parent name color llimit ulimit vlimit *origin">
+    <joint name="${name}_joint" type="revolute"><xacro:insert_block name="origin"/><axis xyz="0 0 -1"/><limit effort="30" velocity="${vlimit}" lower="${llimit}" upper="${ulimit}"/><parent link="${parent}"/><child link="${name}_link"/></joint>
+    <link name="${name}_link">
+      <xacro:box_inertia mass="0.008"/>
+      <visual><origin xyz=" 0 0 0 " rpy="0 0 0"/><geometry><mesh filename="package://arm_description/meshes/F3.stl" scale="${SCALE_MM} ${SCALE_MM} ${SCALE_MM}"/></geometry><material name="${color}"/></visual>
+      <collision><origin xyz="0.0 0.0 -0.0045" rpy="0 0 0"/><geometry><box size="0.025 0.038 0.009"/></geometry></collision>
+    </link>
+  </xacro:macro>
+
+  <xacro:macro name="bioloid_F2_revolute" params="parent name color llimit ulimit vlimit *origin">
+    <joint name="${name}_joint" type="revolute"><xacro:insert_block name="origin"/><axis xyz="0 1 0"/><limit effort="30" velocity="${vlimit}" lower="${llimit}" upper="${ulimit}"/><parent link="${parent}"/><child link="${name}_link"/></joint>
+    <link name="${name}_link">
+      <xacro:box_inertia mass="0.010"/>
+      <visual><origin xyz=" 0 0 0 " rpy="0 0 0"/><geometry><mesh filename="package://arm_description/meshes/F2.stl" scale="${SCALE_MM} ${SCALE_MM} ${SCALE_MM}"/></geometry><material name="${color}"/></visual>
+      <collision><origin xyz="0.0 0.0 0.00775" rpy="0 0 0"/><geometry><box size="0.025 0.0485 0.0375"/></geometry></collision>
+    </link>
+  </xacro:macro>
+
+  <xacro:macro name="bioloid_F4_revolute" params="parent name color llimit ulimit vlimit *origin">
+    <joint name="${name}_joint" type="revolute"><xacro:insert_block name="origin"/><axis xyz="0 1 0"/><limit effort="30" velocity="${vlimit}" lower="${llimit}" upper="${ulimit}"/><parent link="${parent}"/><child link="${name}_link"/></joint>
+    <link name="${name}_link">
+      <xacro:box_inertia mass="0.016"/>
+      <visual><origin xyz=" 0 0 0 " rpy="0 0 0"/><geometry><mesh filename="package://arm_description/meshes/F4.stl" scale="${SCALE_MM} ${SCALE_MM} ${SCALE_MM}"/></geometry><material name="${color}"/></visual>
+      <collision><origin xyz="0.0 0.0 0.0215" rpy="0 0 0"/><geometry><box size="0.028 0.0485 0.065"/></geometry></collision>
+    </link>
+  </xacro:macro>
+  
+  <xacro:macro name="crane_dynamixel_ax12_fixed" params="parent name color *origin">
+    <joint name="${name}_joint" type="fixed"><xacro:insert_block name="origin"/><parent link="${parent}"/><child link="${name}_link"/></joint>
+    <link name="${name}_link">
+      <xacro:box_inertia mass="0.055"/>
+      <visual><origin xyz="0 0 0" rpy="-${M_PI/2} 0 0"/><geometry><mesh filename="package://arm_description/meshes/crane_plus_ax12.stl" scale="${SCALE_MM} ${SCALE_MM} ${SCALE_MM}"/></geometry><material name="${color}"/></visual>
+      <collision><origin xyz="${0-AX12_ORIGIN_OFFSET_X} 0 0" rpy="0 0 0"/><geometry><box size="${AX12_LENGTH} ${CRANE_AX12_WIDTH} ${AX12_BODY_FULL_HEIGHT}"/></geometry></collision>
+    </link>
+  </xacro:macro>
+
+  <xacro:macro name="crane_bioloid_f2_revolute" params="parent name color llimit ulimit vlimit *origin">
+    <joint name="${name}_joint" type="revolute"><xacro:insert_block name="origin"/><axis xyz="0 -1 0"/><limit effort="30" velocity="${vlimit}" lower="${llimit}" upper="${ulimit}"/><parent link="${parent}"/><child link="${name}_link"/></joint>
+    <link name="${name}_link">
+      <xacro:box_inertia mass="0.01"/>
+      <visual><origin xyz="0 0 0" rpy="${M_PI/2} 0 0"/><geometry><mesh filename="package://arm_description/meshes/f2.stl" scale="${SCALE_MM} ${SCALE_MM} ${SCALE_MM}"/></geometry><material name="${color}"/></visual>
+      <collision><origin xyz="0 0 -${F2_AXLE_HEIGHT-CRANE_F2_HEIGHT/2}" rpy="0 0 0"/><geometry><box size="0.025 0.0485 ${CRANE_F2_HEIGHT}"/></geometry></collision>
+    </link>
+  </xacro:macro>
+
+  <xacro:macro name="crane_bioloid_f3_fixed" params="parent name color *origin">
+    <joint name="${name}_joint" type="fixed"><xacro:insert_block name="origin"/><parent link="${parent}"/><child link="${name}_link"/></joint>
+    <link name="${name}_link">
+      <xacro:box_inertia mass="0.005"/>
+      <visual><origin xyz="0 0 0" rpy="${M_PI/2} 0 ${M_PI}"/><geometry><mesh filename="package://arm_description/meshes/f3.stl" scale="${SCALE_MM} ${SCALE_MM} ${SCALE_MM}"/></geometry><material name="${color}"/></visual>
+      <collision><origin xyz="0 0 0.0045" rpy="0 0 0"/><geometry><box size="0.025 0.038 0.009"/></geometry></collision>
+    </link>
+  </xacro:macro>
+
+  <xacro:macro name="custom_finger" params="parent name color *origin">
+    <joint name="${name}_joint" type="fixed"><xacro:insert_block name="origin"/><parent link="${parent}"/><child link="${name}_link"/></joint>
+    <link name="${name}_link">
+      <xacro:box_inertia mass="0.01"/>
+      <visual><origin xyz="0.05 0 0" rpy="0 0 0"/><geometry><mesh filename="package://arm_description/meshes/garra.stl" scale="${SCALE_MM} ${SCALE_MM} ${SCALE_MM}"/></geometry><material name="${color}"/></visual>
+      <collision><origin xyz="0.05 0 0" rpy="0 0 0"/><geometry><mesh filename="package://arm_description/meshes/garra.stl" scale="${SCALE_MM} ${SCALE_MM} ${SCALE_MM}"/></geometry></collision>
+    </link>
+  </xacro:macro>
+</robot>

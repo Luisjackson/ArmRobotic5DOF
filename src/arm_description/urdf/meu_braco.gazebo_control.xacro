@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+ <!-- Esse arquivo define  a ponte entre o gazebo e o ros2_control -->
+    <ros2_control name="GazeboSystem" type="system">
+        <hardware>
+            <plugin>gz_ros2_control/GazeboSimSystem</plugin>
+        </hardware>
+
+        <joint name="arm_shoulder_pan_joint">
+            <command_interface name="position">
+                <param name="min">-2.617</param>
+                <param name="max">2.617</param>
+            </command_interface>
+            <state_interface name="position"/>
+            <state_interface name="velocity"/>
+        </joint>
+
+        <joint name="arm_shoulder_lift_joint">
+            <command_interface name="position">
+                <param name="min">-2.2</param>
+                <param name="max">2.16</param>
+            </command_interface>
+            <state_interface name="position"/>
+            <state_interface name="velocity"/>
+        </joint>
+
+        <joint name="arm_elbow_flex_joint">
+            <command_interface name="position">
+                <param name="min">-2.42</param>
+                <param name="max">2.38</param>
+            </command_interface>
+            <state_interface name="position"/>
+            <state_interface name="velocity"/>
+        </joint>
+
+        <joint name="arm_wrist_flex_joint">
+            <command_interface name="position">
+                <param name="min">-1.72</param>
+                <param name="max">1.68</param>
+            </command_interface>
+            <state_interface name="position"/>
+            <state_interface name="velocity"/>
+        </joint>
+
+        <joint name="crane_plus_moving_finger_joint">
+            <command_interface name="position">
+                <param name="min">-0.6</param>
+                <param name="max">0.508</param>
+            </command_interface>
+            <state_interface name="position"/>
+            <state_interface name="velocity"/>
+        </joint>
+    </ros2_control>
+
+</robot>

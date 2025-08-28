@@ -1,0 +1,9 @@
+<library path="arm_hardware">
+  <class name="arm_hardware/ArmHardwareInterface"
+         type="arm_hardware::ArmHardwareInterface"
+         base_class_type="hardware_interface::SystemInterface">
+    <description>
+      Interface de hardware para o braço robótico com Arduino.
+    </description>
+  </class>
+</library>

@@ -13,7 +13,6 @@ def generate_launch_description():
 
     xacro_file = os.path.join(pkg_dir, 'urdf', 'meu_braco.urdf.xacro')
 
-
     robot_description_content = ParameterValue(
         Command(['xacro ', xacro_file]),
         value_type=str

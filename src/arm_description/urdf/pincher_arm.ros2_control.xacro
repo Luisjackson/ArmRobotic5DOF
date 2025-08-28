@@ -1,11 +1,13 @@
-<?xml version="1.0"?>
+<!-- <?xml version="1.0"?>
 <robot name="pincher_arm" xmlns:xacro="http://www.ros.org/wiki/xacro">
     <ros2_control name="GazeboSystem" type="system">
         <hardware>
             <plugin>gz_ros2_control/GazeboSimSystem</plugin>
         </hardware>
         <joint name="arm_shoulder_pan_joint">
-            <command_interface name="position"/> <state_interface name="position"/> <state_interface name="velocity"/>
+            <command_interface name="position"/> 
+            <state_interface name="position"/> 
+            <state_interface name="velocity"/>
         </joint>
         <joint name="arm_shoulder_lift_joint">
             <command_interface name="position"/> <state_interface name="position"/> <state_interface name="velocity"/>
@@ -20,4 +22,4 @@
             <command_interface name="position"/> <state_interface name="position"/> <state_interface name="velocity"/>
         </joint>
     </ros2_control>
-</robot>
+</robot> -->
