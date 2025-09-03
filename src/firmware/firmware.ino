@@ -5,8 +5,8 @@ using namespace ControlTableItem;
 DynamixelShield dxl;
 
 const int JOINT_COUNT = 5;
-// Ordem: pan, lift, elbow, wrist, gripper
-const uint8_t dxl_ids[JOINT_COUNT] = {1, 2, 3, 4, 5};
+// Ordem das juntas no ROS: pan, lift, elbow, wrist, gripper
+const uint8_t dxl_ids[JOINT_COUNT] = {1, 2, 3, 4, 5}; // IDs dos seus servos nesta ordem
 
 void setup() {
   // Inicia a comunicação serial com o PC (ROS)
@@ -22,7 +22,7 @@ void setup() {
     if(dxl.ping(dxl_ids[i])) {
       // Configura para o modo de controle de posição
       dxl.setOperatingMode(dxl_ids[i], OP_POSITION);
-      // Liga o torque
+      // Liga o torque para que o servo mantenha a posição
       dxl.torqueOn(dxl_ids[i]);
     }
   }
@@ -68,5 +68,5 @@ void loop() {
   }
   Serial.println(status_string);
 
-  delay(20); // Um pequeno delay para não sobrecarregar a comunicação
+  delay(50); 
 }

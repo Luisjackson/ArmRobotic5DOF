@@ -12,20 +12,14 @@ find_package(ament_cmake REQUIRED)
 # find_package(<dependency> REQUIRED)
 
 install(
-  DIRECTORY urdf
+  DIRECTORY launch urdf meshes scripts
   DESTINATION share/${PROJECT_NAME}
 )
+
 install(
-  DIRECTORY meshes
-  DESTINATION share/${PROJECT_NAME}
-)
-install(
-  DIRECTORY launch
-  DESTINATION share/${PROJECT_NAME}
-)
-install(
-  DIRECTORY config
-  DESTINATION share/${PROJECT_NAME}
+  PROGRAMS
+  scripts/apontar_objeto.py
+  DESTINATION lib/${PROJECT_NAME}
 )
 
 install(DIRECTORY

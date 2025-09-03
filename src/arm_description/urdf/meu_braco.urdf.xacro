@@ -1,32 +1,37 @@
 <?xml version="1.0"?>
-<robot name="turtlebot_arm" xmlns:xacro="http://ros.org.wiki/xacro">
+<robot name="turtlebot_arm" xmlns:xacro="http://ros.org/wiki/xacro">
 
-  <xacro:arg name="use_real_hardware" default="false" />
-
-  <xacro:if value="$(arg use_real_hardware)">
-    <xacro:include filename="$(find arm_description)/urdf/meu_braco.hardware_control.xacro" />
-  </xacro:if>
-  <xacro:unless value="$(arg use_real_hardware)">
-    <xacro:include filename="$(find arm_description)/urdf/meu_braco.gazebo_control.xacro" />
-  </xacro:unless>
-
-  <xacro:property name="joints_vlimit" value="1.571"/>
-  <xacro:property name="pan_llimit" value="-2.617"/>
-  <xacro:property name="pan_ulimit" value="2.617"/>
-  <xacro:property name="shoulder_llimit" value="-2.2"/>
-  <xacro:property name="shoulder_ulimit" value="2.16"/>
-  <xacro:property name="elbow_llimit" value="-2.42"/>
-  <xacro:property name="elbow_ulimit" value="2.38"/>
-  <xacro:property name="wrist_llimit" value="-1.72"/>
-  <xacro:property name="wrist_ulimit" value="1.68"/>
-
-  <xacro:include filename="$(find arm_description)/urdf/turtlebot_arm.xacro"/>
+    <xacro:arg name="ros2_control_xacro_path" 
+               default="$(find arm_description)/urdf/model_ros2_control.xacro" />
   
-  <link name="base_link"/>
+    <xacro:include filename="$(arg ros2_control_xacro_path)" />
 
-  <xacro:turtlebot_arm parent="base_link" color="Gray" gripper_color="Gray" 
-                       pincher_gripper="false" turtlebot_gripper="false"
-                       crane_plus_gripper="true">
-    <origin xyz="0.1 0.03 0.435"/>
-  </xacro:turtlebot_arm>
+    <gazebo>
+        <plugin filename="gz_ros2_control-system" name="gz_ros2_control::GazeboSimROS2ControlPlugin">
+            <parameters>$(find arm_description)/config/ros2_controllers.yaml</parameters>
+        </plugin>
+    </gazebo>
+
+
+    <xacro:property name="joints_vlimit" value="1.571"/>
+    <xacro:property name="pan_llimit" value="-2.617"/>
+    <xacro:property name="pan_ulimit" value="2.617"/>
+    <xacro:property name="shoulder_llimit" value="-2.2"/>
+    <xacro:property name="shoulder_ulimit" value="2.16"/>
+    <xacro:property name="elbow_llimit" value="-2.42"/>
+    <xacro:property name="elbow_ulimit" value="2.38"/>
+    <xacro:property name="wrist_llimit" value="-1.72"/>
+    <xacro:property name="wrist_ulimit" value="1.68"/>
+
+    <xacro:include filename="$(find arm_description)/urdf/turtlebot_arm.xacro"/>
+    
+    <link name="base_link"/>
+
+    <xacro:turtlebot_arm parent="base_link" color="Gray" gripper_color="Gray" 
+                         pincher_gripper="false" turtlebot_gripper="false"
+                         crane_plus_gripper="true">
+        <origin xyz="0 0 0"/>
+    </xacro:turtlebot_arm>
+
 </robot>
+

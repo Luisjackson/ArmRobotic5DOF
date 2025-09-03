@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<robot name="meu_braco_atual" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <xacro:arg name="use_real_robot" default="false" />
+
+    <xacro:property name="ros2_control_xacro_path">
+        <xacro:if value="$(arg use_real_robot)">
+            $(find arm_description)/urdf/real.ros2_control.xacro
+        </xacro:if>
+        <xacro:unless value="$(arg use_real_robot)">
+            $(find arm_description)/urdf/simulacao.ros2_control.xacro
+        </xacro:unless>
+    </xacro:property>
+
+    <xacro:include filename="$(property ros2_control_xacro_path)" />
+
+    <!-- Inclui a configuração específica do Gazebo (plugins) -->
+    <xacro:include filename="$(find arm_description)/urdf/meu_braco_atual_gazebo.xacro" />
+    
+    <!-- Inclui a descrição física/visual do robô -->
+    <xacro:include filename="$(find arm_description)/urdf/turtlebot_arm.xacro" />
+
+    <!-- 4. Cria a base e instancia o braço -->
+    <link name="base_link"/>
+
+    <xacro:turtlebot_arm parent="base_link" color="Gray" gripper_color="Gray" 
+                         pincher_gripper="false" turtlebot_gripper="false"
+                         crane_plus_gripper="true">
+        <origin xyz="0 0 0"/>
+    </xacro:turtlebot_arm>
+
+</robot>

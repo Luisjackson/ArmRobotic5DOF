@@ -1,11 +1,17 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
- <!-- Esse arquivo define  a ponte entre o gazebo e o ros2_control -->
-    <ros2_control name="GazeboSystem" type="system">
-        <hardware>
-            <plugin>gz_ros2_control/GazeboSimSystem</plugin>
-        </hardware>
-
+ <ros2_control name="GazeboSystem" type="system">
+        
+        <xacro:if value="$(arg is_ignition)">
+            <hardware>
+                <plugin>ign_ros2_control/IgnitionSystem</plugin>
+            </hardware>
+        </xacro:if>
+        <xacro:unless value="$(arg is_ignition)">
+            <hardware>
+                <plugin>gz_ros2_control/GazeboSimSystem</plugin>
+            </hardware>
+        </xacro:unless>
         <joint name="arm_shoulder_pan_joint">
             <command_interface name="position">
                 <param name="min">-2.617</param>

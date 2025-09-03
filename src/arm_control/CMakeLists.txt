@@ -24,14 +24,8 @@ if(BUILD_TESTING)
 endif()
 
 # Instala a pasta de launch files
-install(DIRECTORY
-  launch
-  DESTINATION share/${PROJECT_NAME}
-)
-
-# Instala a pasta de config
-install(DIRECTORY
-  config
+install(
+  DIRECTORY config launch
   DESTINATION share/${PROJECT_NAME}
 )
 
