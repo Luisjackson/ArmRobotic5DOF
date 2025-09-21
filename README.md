@@ -32,7 +32,7 @@ Clone o repositório:
 
 ```bash
 git clone https://github.com/Luisjackson/ArmRobotic5DOF.git
-cd ArmRobotic6DOF
+cd ArmRobotic5DOF
 ```
 
 Compile o workspace:
