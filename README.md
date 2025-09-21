@@ -1,4 +1,4 @@
-# Braço robótico com 6 Graus de Liberdade
+# Braço robótico com 5 Graus de Liberdade
 
 Projeto de um **braço robótico de 6 DOF** utilizando **ROS2** com pacotes para simulação, controle, descrição do modelo e firmware.
 
