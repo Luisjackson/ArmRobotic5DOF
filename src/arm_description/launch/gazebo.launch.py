@@ -12,19 +12,16 @@ def generate_launch_description():
     pkg_dir = get_package_share_directory('arm_description')
     pkg_ros_gz_sim = get_package_share_directory('ros_gz_sim')
 
-    # Caminho para o seu ficheiro URDF principal que contém a câmara
     xacro_file = os.path.join(pkg_dir, 'urdf', 'meu_braco.urdf.xacro')
 
-    # Processa o ficheiro XACRO para gerar a descrição do robô
-    # Passamos 'use_real_hardware:=false' para garantir que os plugins de simulação sejam carregados
     robot_description_content = Command([
         'xacro ', xacro_file,
-        ' use_real_hardware:=false', # Argumento que você já tinha
+        ' use_real_hardware:=false',
         ' is_ignition:=true',
         ' use_gazebo_uri:=true'    
     ])
 
-    # Nó do Robot State Publisher (publica as transformações do robô)
+    # Nó do Robot State Publisher p publica as transformações do robô
     robot_state_publisher_node = Node(
         package='robot_state_publisher',
         executable='robot_state_publisher',
@@ -35,16 +32,13 @@ def generate_launch_description():
         ]
     )
 
-    # Inicia o mundo do Gazebo
     gazebo = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             os.path.join(pkg_ros_gz_sim, 'launch', 'gz_sim.launch.py')
         ),
-        # Pode mudar 'empty.sdf' para outro mundo se tiver um
         launch_arguments={'gz_args': '-r empty.sdf'}.items()
     )
 
-    # Insere o robô no Gazebo
     spawn_entity_node = Node(
         package='ros_gz_sim',
         executable='create',
@@ -52,7 +46,6 @@ def generate_launch_description():
         output='screen'
     )
 
-    # Inicia os controladores do braço no Gazebo para que você possa movê-lo
     load_joint_state_broadcaster = Node(
         package='controller_manager',
         executable='spawner',

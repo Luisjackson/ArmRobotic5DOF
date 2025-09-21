@@ -10,9 +10,7 @@ double map_value(double value, double from_min, double from_max, double to_min, 
 
 namespace arm_hardware
 {
-// MODIFICADO: Funções renomeadas para corresponder aos nomes de juntas do projeto antigo (o nosso padrão)
 
-// ajuste cada um de acordo com a calibração real do servo
 const int WAIST_OFFSET     = 10;   // antigo 10, testar -1, testar 36
 const int SHOULDER_OFFSET    = 34; // Antiga LIFT_OFFSET
 const int ELBOW_OFFSET   = -88; 
@@ -67,8 +65,6 @@ hardware_interface::CallbackReturn ArmHardwareInterface::on_init(const hardware_
     }
     hw_commands_.resize(info_.joints.size(), 0.0);
     hw_states_.resize(info_.joints.size(), 0.0);
-    // MODIFICADO & CORRIGIDO: O nome do parâmetro no seu XACRO é "serial_port", não "serial_port_name". 
-    // Usar .at() com o nome errado causaria uma falha.
     serial_port_name_ = info_.hardware_parameters.at("serial_port");
     return hardware_interface::CallbackReturn::SUCCESS;
 }
@@ -147,7 +143,6 @@ hardware_interface::return_type ArmHardwareInterface::read(const rclcpp::Time &,
 
             if (new_ticks.size() == 5) {
                 for (size_t i = 0; i < hw_states_.size(); ++i) {
-                    // MODIFICADO: Chamando as funções com os nomes padronizados
                     switch(i) {
                         case 0: hw_states_[i] = waist_ticks_to_rad(new_ticks[i]); break;
                         case 1: hw_states_[i] = shoulder_ticks_to_rad(new_ticks[i]); break;
@@ -172,7 +167,6 @@ hardware_interface::return_type ArmHardwareInterface::write(const rclcpp::Time &
     
     for (size_t i = 0; i < hw_commands_.size(); ++i) {
         int ticks = 0;
-        // MODIFICADO: Chamando as funções com os nomes padronizados
         switch(i) {
             case 0: ticks = waist_rad_to_ticks(hw_commands_[i]); break;
             case 1: ticks = shoulder_rad_to_ticks(hw_commands_[i]); break;

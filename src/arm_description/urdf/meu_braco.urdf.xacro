@@ -26,7 +26,6 @@
     <!-- Inclui a descrição visual/física do braço -->
     <xacro:include filename="$(find arm_description)/urdf/turtlebot_arm.xacro"/>
     
-    <!-- Link base do robô -->
     <link name="base_link"/>
 
     <!-- Instancia o braço robótico no mundo -->
@@ -38,7 +37,7 @@
 
     <link name="camera_link">
       <visual>
-        <!-- Define a aparência da câmara no simulador (uma pequena caixa vermelha) -->
+        <!-- Define a aparência da câmara no simulador -->
         <geometry>
           <box size="0.025 0.05 0.025"/>
         </geometry>
@@ -84,7 +83,6 @@
           </clip>
         </camera>
 
-        <!-- Este é o plugin que pega os dados da câmara simulada e os   -->
         <!-- publica como tópicos ROS 2 que o RViz e outros nós podem usar. -->
         <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
           <ros>
@@ -93,8 +91,6 @@
             <argument>image_raw:=image_raw</argument>
             <argument>camera_info:=camera_info</argument>
           </ros>
-
-          <!-- O nome do frame da câmara, que deve ser o mesmo do nosso link -->
           <camera_frame>camera_link</camera_frame>
         </plugin>
       </sensor>

@@ -91,7 +91,6 @@ class RobustPointAndGripperTester(Node):
         self.check_completion()
 
     def check_completion(self):
-        # Desliga o nó apenas quando ambas as ações terminarem
         if self.arm_goal_done and self.gripper_goal_done:
             self.get_logger().info("Teste concluído.")
             rclpy.shutdown()

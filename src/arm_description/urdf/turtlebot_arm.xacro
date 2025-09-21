@@ -20,7 +20,6 @@
     <xacro:custom_finger parent="crane_plus_internal_fixed_finger_joiner_link" name="crane_plus_internal_fixed_finger" color="Black">
       <origin xyz="0 0 0" rpy="0 0 ${M_PI}"/>
     </xacro:custom_finger>
-    <!-- MODIFICADO: O nome da junta da garra foi alterado de "crane_plus_moving_finger" para "gripper_finger" -->
     <xacro:crane_bioloid_f2_revolute parent="crane_plus_internal_gripper_servo_link" name="gripper_finger" color="Gray" vlimit="1.571" llimit="-0.6" ulimit="0.508">
         <origin xyz="-${AX12_ORIGIN_TO_AXLE} 0 0" rpy="-${M_PI/2} 0 -${M_PI/2}"/>
     </xacro:crane_bioloid_f2_revolute>
@@ -40,14 +39,12 @@
     <xacro:dynamixel_AX12_fixed parent="arm_base_link" name="arm_shoulder_pan_servo">
       <origin xyz="0 0 0" rpy="${M_PI/2} 0 ${M_PI/2}"/>
     </xacro:dynamixel_AX12_fixed>
-    <!-- MODIFICADO: O nome da junta da base foi alterado de "arm_shoulder_pan" para "waist" -->
     <xacro:bioloid_F3_revolute parent="arm_shoulder_pan_servo_link" name="waist" color="${color}" vlimit="${joints_vlimit}" llimit="${pan_llimit}" ulimit="${pan_ulimit}">
       <origin xyz="0 ${AX12_WIDTH/2} 0" rpy="${-M_PI/2} ${M_PI/2} ${M_PI}"/>
     </xacro:bioloid_F3_revolute>
     <xacro:dynamixel_AX12_fixed parent="waist_link" name="arm_shoulder_lift_servo">
       <origin xyz="0 0 ${-AX12_HEIGHT-F10_HEIGHT+0.001}" rpy="0 ${M_PI} 0"/>
     </xacro:dynamixel_AX12_fixed>
-    <!-- MODIFICADO: O nome da junta do ombro foi alterado de "arm_shoulder_lift" para "shoulder_pitch" -->
     <xacro:bioloid_F4_revolute parent="arm_shoulder_lift_servo_link" name="shoulder_pitch" color="${color}" vlimit="${joints_vlimit}" llimit="${shoulder_llimit}" ulimit="${shoulder_ulimit}">
       <origin xyz="0 0 0" rpy="0 0 0"/>
     </xacro:bioloid_F4_revolute>
@@ -56,7 +53,6 @@
     <xacro:bioloid_F10_fixed parent="arm_shoulder_F10_1_link" name="arm_shoulder_F10_2" color="${color}"><origin xyz="0 0 ${F10_HEIGHT}" rpy="0 0 0"/></xacro:bioloid_F10_fixed>
     <xacro:bioloid_F3_fixed parent="arm_shoulder_F10_2_link" name="arm_shoulder_F3_0" color="${color}"><origin xyz="0 0 ${F10_HEIGHT/2}" rpy="0 ${M_PI} 0"/></xacro:bioloid_F3_fixed>
     <xacro:dynamixel_AX12_fixed parent="arm_shoulder_F3_0_link" name="arm_elbow_flex_servo"><origin xyz="0 0 ${-AX12_HEIGHT-F10_HEIGHT+0.001}" rpy="0 ${M_PI} 0"/></xacro:dynamixel_AX12_fixed>
-    <!-- MODIFICADO: O nome da junta do cotovelo foi alterado de "arm_elbow_flex" para "elbow_pitch" -->
     <xacro:bioloid_F4_revolute parent="arm_elbow_flex_servo_link" name="elbow_pitch" color="${color}" vlimit="${joints_vlimit}" llimit="${elbow_llimit}" ulimit="${elbow_ulimit}">
       <origin xyz="0 0 0" rpy="0 0 0"/>
     </xacro:bioloid_F4_revolute>
@@ -65,7 +61,6 @@
     <xacro:bioloid_F10_fixed parent="arm_elbow_F10_1_link" name="arm_elbow_F10_2" color="${color}"><origin xyz="0 0 ${F10_HEIGHT}" rpy="0 0 0"/></xacro:bioloid_F10_fixed>
     <xacro:bioloid_F3_fixed parent="arm_elbow_F10_2_link" name="arm_elbow_F3_0" color="${color}"><origin xyz="0 0 ${F10_HEIGHT/2}" rpy="0 ${M_PI} 0"/></xacro:bioloid_F3_fixed>
     <xacro:dynamixel_AX12_fixed parent="arm_elbow_F3_0_link" name="arm_wrist_flex_servo"><origin xyz="0 0 ${-AX12_HEIGHT-F10_HEIGHT+0.001}" rpy="0 ${M_PI} 0"/></xacro:dynamixel_AX12_fixed>
-    <!-- MODIFICADO: O nome da junta do pulso foi alterado de "arm_wrist_flex" para "wrist_pitch" -->
     <xacro:bioloid_F2_revolute parent="arm_wrist_flex_servo_link" name="wrist_pitch" color="${color}" vlimit="${joints_vlimit}" llimit="${wrist_llimit}" ulimit="${wrist_ulimit}">
       <origin xyz="0 0 0" rpy="0 0 0"/>
     </xacro:bioloid_F2_revolute>

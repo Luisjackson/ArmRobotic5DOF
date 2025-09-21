@@ -14,13 +14,10 @@
 
     <xacro:include filename="$(property ros2_control_xacro_path)" />
 
-    <!-- Inclui a configuração específica do Gazebo (plugins) -->
     <xacro:include filename="$(find arm_description)/urdf/meu_braco_atual_gazebo.xacro" />
-    
-    <!-- Inclui a descrição física/visual do robô -->
+
     <xacro:include filename="$(find arm_description)/urdf/turtlebot_arm.xacro" />
 
-    <!-- 4. Cria a base e instancia o braço -->
     <link name="base_link"/>
 
     <xacro:turtlebot_arm parent="base_link" color="Gray" gripper_color="Gray" 
