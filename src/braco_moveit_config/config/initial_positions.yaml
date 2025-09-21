@@ -1,8 +1,8 @@
 # Default initial positions for turtlebot_arm's ros2_control fake system
 
 initial_positions:
-  arm_elbow_flex_joint: 0
-  arm_shoulder_lift_joint: 0
-  arm_shoulder_pan_joint: 0
-  arm_wrist_flex_joint: 0
-  crane_plus_moving_finger_joint: 0
+  elbow_pitch_joint: 0
+  shoulder_pitch_joint: 0
+  waist_joint: 0
+  wrist_pitch_joint: 0
+  gripper_finger_joint: 0

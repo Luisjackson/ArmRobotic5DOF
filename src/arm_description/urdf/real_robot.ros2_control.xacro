@@ -3,30 +3,26 @@
   <ros2_control name="ArduinoHardware" type="system">
     <hardware>
       <plugin>arm_hardware/ArmHardwareInterface</plugin>
-      <param name="serial_port_name">/dev/ttyACM0</param>
+      <param name="serial_port">/dev/ttyACM0</param>
     </hardware>
 
-    <joint name="arm_shoulder_pan_joint">
+    <joint name="waist_joint">
       <command_interface name="position"/>
       <state_interface name="position"/>
     </joint>
-
-    <joint name="arm_shoulder_lift_joint">
+    <joint name="shoulder_pitch_joint">
       <command_interface name="position"/>
       <state_interface name="position"/>
     </joint>
-
-    <joint name="arm_elbow_flex_joint">
+    <joint name="elbow_pitch_joint">
       <command_interface name="position"/>
       <state_interface name="position"/>
     </joint>
-
-    <joint name="arm_wrist_flex_joint">
+    <joint name="wrist_pitch_joint">
       <command_interface name="position"/>
       <state_interface name="position"/>
     </joint>
-
-    <joint name="crane_plus_moving_finger_joint">
+    <joint name="gripper_finger_joint">
       <command_interface name="position"/>
       <state_interface name="position"/>
     </joint>

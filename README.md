@@ -1,6 +1,6 @@
-# Braço robótico com 6 Graus de Liberdade
+# Braço robótico com 5 Graus de Liberdade
 
-Projeto de um **braço robótico de 6 DOF** utilizando **ROS2** com pacotes para simulação, controle, descrição do modelo e firmware.
+Projeto de um **braço robótico de 5 DOF** utilizando **ROS2** com pacotes para simulação, controle, descrição do modelo e firmware.
 
 -----
 
@@ -31,7 +31,7 @@ Projeto de um **braço robótico de 6 DOF** utilizando **ROS2** com pacotes para
 Clone o repositório:
 
 ```bash
-git clone https://github.com/Luisjackson/ArmRobotic6DOF.git
+git clone https://github.com/Luisjackson/ArmRobotic5DOF.git
 cd ArmRobotic6DOF
 ```
 
@@ -63,7 +63,7 @@ source install/setup.bash
 
 ## 📸 Demonstração
 
-<!-- (Adicionar aqui prints do braço no RViz/Gazebo ou até um gif curto mostrando o braço se movendo\!) -->
+![Braço robótico funcionando](assets/video.gif)
 
 -----
 

@@ -20,6 +20,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
+            'test_point = arm_py_examples.test_point:main',
         ],
     },
 )

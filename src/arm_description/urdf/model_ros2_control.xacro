@@ -12,7 +12,7 @@
                 <plugin>gz_ros2_control/GazeboSimSystem</plugin>
             </hardware>
         </xacro:unless>
-        <joint name="arm_shoulder_pan_joint">
+        <joint name="waist_joint">
             <command_interface name="position">
                 <param name="min">-2.617</param>
                 <param name="max">2.617</param>
@@ -21,7 +21,7 @@
             <state_interface name="velocity"/>
         </joint>
 
-        <joint name="arm_shoulder_lift_joint">
+        <joint name="shoulder_pitch_joint">
             <command_interface name="position">
                 <param name="min">-2.2</param>
                 <param name="max">2.16</param>
@@ -30,7 +30,7 @@
             <state_interface name="velocity"/>
         </joint>
 
-        <joint name="arm_elbow_flex_joint">
+        <joint name="elbow_pitch_joint">
             <command_interface name="position">
                 <param name="min">-2.42</param>
                 <param name="max">2.38</param>
@@ -39,7 +39,7 @@
             <state_interface name="velocity"/>
         </joint>
 
-        <joint name="arm_wrist_flex_joint">
+        <joint name="wrist_pitch_joint">
             <command_interface name="position">
                 <param name="min">-1.72</param>
                 <param name="max">1.68</param>
@@ -48,7 +48,7 @@
             <state_interface name="velocity"/>
         </joint>
 
-        <joint name="crane_plus_moving_finger_joint">
+        <joint name="gripper_finger_joint">
             <command_interface name="position">
                 <param name="min">-0.6</param>
                 <param name="max">0.508</param>

@@ -15,10 +15,10 @@ controller_manager:
 arm_controller:
   ros__parameters:
     joints:
-      - arm_shoulder_pan_joint
-      - arm_shoulder_lift_joint
-      - arm_elbow_flex_joint
-      - arm_wrist_flex_joint
+      - waist_joint
+      - shoulder_pitch_joint
+      - elbow_pitch_joint
+      - wrist_pitch_joint
     command_interfaces:
       - position
     state_interfaces:
@@ -27,7 +27,7 @@ arm_controller:
 gripper_controller:
   ros__parameters:
     joints:
-      - crane_plus_moving_finger_joint
+      - gripper_finger_joint
     command_interfaces:
       - position
     state_interfaces:

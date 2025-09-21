@@ -8,27 +8,27 @@ default_acceleration_scaling_factor: 0.1
 # Specific joint properties can be changed with the keys [max_position, min_position, max_velocity, max_acceleration]
 # Joint limits can be turned off with [has_velocity_limits, has_acceleration_limits]
 joint_limits:
-  arm_elbow_flex_joint:
+  elbow_pitch_joint:
     has_velocity_limits: true
     max_velocity: 1.571
     has_acceleration_limits: false
     max_acceleration: 0
-  arm_shoulder_lift_joint:
+  shoulder_pitch_joint:
     has_velocity_limits: true
     max_velocity: 1.571
     has_acceleration_limits: false
     max_acceleration: 0
-  arm_shoulder_pan_joint:
+  waist_joint:
     has_velocity_limits: true
     max_velocity: 1.571
     has_acceleration_limits: false
     max_acceleration: 0
-  arm_wrist_flex_joint:
+  wrist_pitch_joint:
     has_velocity_limits: true
     max_velocity: 1.571
     has_acceleration_limits: false
     max_acceleration: 0
-  crane_plus_moving_finger_joint:
+  gripper_finger_joint:
     has_velocity_limits: true
     max_velocity: 1.571
     has_acceleration_limits: false
